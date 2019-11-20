@@ -49,35 +49,35 @@ web3 = new Web3(App.web3Provider);
   },
 
   initContract: function() {
-    $.getJSON('Adoption.json', function(data) {
+    $.getJSON('Hiring.json', function(data) { //Make reference to the build folder
       // Get the necessary contract artifact file and instantiate it with truffle-contract
-      var AdoptionArtifact = data;
-      App.contracts.Adoption = TruffleContract(AdoptionArtifact);
+      var HiringArtifact = data;
+      App.contracts.Hiring = TruffleContract(HiringArtifact);
     
       // Set the provider for our contract
-      App.contracts.Adoption.setProvider(App.web3Provider);
+      App.contracts.Hiring.setProvider(App.web3Provider);
     
       // Use our contract to retrieve and mark the adopted pets
-      return App.markAdopted();
+      return App.markHired();
     });
 
     return App.bindEvents();
   },
 
   bindEvents: function() {
-    $(document).on('click', '.btn-adopt', App.handleAdopt);
+    $(document).on('click', '.btn-adopt', App.handleHire);
   },
 
-  markAdopted: function(adopters, account) {
-    var adoptionInstance;
+  markHired: function(alumnos, account) {
+    var hiringInstance;
 
-    App.contracts.Adoption.deployed().then(function(instance) {
-      adoptionInstance = instance;
+    App.contracts.Hiring.deployed().then(function(instance) {
+      hiringInstance = instance;
 
-      return adoptionInstance.getAdopters.call();
-    }).then(function(adopters) {
-      for (i = 0; i < adopters.length; i++) {
-        if (adopters[i] !== '0x0000000000000000000000000000000000000000') {
+      return hiringInstance.getAlumnos.call();
+    }).then(function(alumnos) {
+      for (i = 0; i < alumnos.length; i++) {
+        if (alumnos[i] !== '0x0000000000000000000000000000000000000000') {
           $('.panel-pet').eq(i).find('button').text('Success').attr('disabled', true);
         }
       }
@@ -87,12 +87,12 @@ web3 = new Web3(App.web3Provider);
 
   },
 
-  handleAdopt: function(event) {
+  handleHire: function(event) {
     event.preventDefault();
 
-    var petId = parseInt($(event.target).data('id'));
+    var alumnoId = parseInt($(event.target).data('id'));
 
-    var adoptionInstance;
+    var hiringInstance;
 
     web3.eth.getAccounts(function(error, accounts) {
       if (error) {
@@ -101,13 +101,13 @@ web3 = new Web3(App.web3Provider);
     
       var account = accounts[0];
     
-      App.contracts.Adoption.deployed().then(function(instance) {
-        adoptionInstance = instance;
+      App.contracts.Hiring.deployed().then(function(instance) {
+        hiringInstance = instance;
     
         // Execute adopt as a transaction by sending account
-        return adoptionInstance.adopt(petId, {from: account});
+        return hiringInstance.hire(alumnoId, {from: account});
       }).then(function(result) {
-        return App.markAdopted();
+        return App.markHired();
       }).catch(function(err) {
         console.log(err.message);
       });
