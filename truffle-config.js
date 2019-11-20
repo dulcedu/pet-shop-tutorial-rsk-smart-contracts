@@ -2,7 +2,7 @@ const HDWalletProvider = require('truffle-hdwallet-provider');
 
 //Put your mnemonic in the .env
 //1) Install dotenv dependecy (npm i dotenv --save)
-//2) Create .env file in the root directory 
+//2) Create .env file in the root directory. In root direcory touch .env or right click
 //3) Require dotenv
 
 require('dotenv').config();
@@ -31,7 +31,7 @@ module.exports = {
       network_id: 30
     },*/
 
-    testnet: {
+    testnetRSK: {
       provider: () => new HDWalletProvider(mnemonic, 'https://public-node.testnet.rsk.co'),
         gas: 2500000,
         gasPrice: 59240000,
