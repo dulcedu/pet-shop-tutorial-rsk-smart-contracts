@@ -5,7 +5,7 @@
 This tutorial will take you through the process of building your first dapp in RSK---an adoption tracking system for a pet shop! I used as a source and total inspiration Josh Quintal's tutorial. 
 https://www.trufflesuite.com/tutorials/pet-shop
 
-## RSK (RootStock) is compatibility with the EVM (Ethereum Virtual Machine) 
+## RSK (RootStock) is compatible with the EVM (Ethereum Virtual Machine) 
 # Meaning that the dApps created on Ethereum’s blockchain can easily be ported to RSK. In this case, it's as simple as change your network in your truffle-config.js
 
 This tutorial is meant for those with a basic knowledge of Blockchain and smart contracts, who have some knowledge of HTML and JavaScript, but who are new to dapps. Don't worry if you don't have the basic knowledge of Blockchain you can still learn from this tutorial ;)
